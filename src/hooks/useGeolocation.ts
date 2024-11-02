@@ -8,8 +8,6 @@ type Location = {
 type Return = {
   data?: Location;
   error?: string;
-  isSuccess: boolean;
-  isError: boolean;
 };
 
 export const useGeolocation = (): Return => {
@@ -37,7 +35,5 @@ export const useGeolocation = (): Return => {
   return {
     data: location,
     error,
-    isSuccess: !error && !!location,
-    isError: !!error,
   };
 };
