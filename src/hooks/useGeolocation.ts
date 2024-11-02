@@ -5,7 +5,12 @@ type Location = {
   longitude: number;
 };
 
-type Return = { data?: Location; error?: string };
+type Return = {
+  data?: Location;
+  error?: string;
+  isSuccess: boolean;
+  isError: boolean;
+};
 
 export const useGeolocation = (): Return => {
   const [location, setLocation] = useState<Location>();
@@ -32,5 +37,7 @@ export const useGeolocation = (): Return => {
   return {
     data: location,
     error,
+    isSuccess: !error && !!location,
+    isError: !!error,
   };
 };
