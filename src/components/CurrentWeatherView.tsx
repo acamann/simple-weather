@@ -1,23 +1,33 @@
+import { useGeolocation } from "../hooks/useGeolocation";
 import { useGetCurrentWeatherQuery } from "../services/weather";
+import { CurrentWeather as TCurrentWeather } from "../services/weatherTypes";
 
 type Props = {
-  location: {
-    latitude: number;
-    longitude: number;
-  };
+  weather: TCurrentWeather;
 };
 
-export const CurrentWeatherView: React.FC<Props> = ({
-  location: { latitude, longitude },
-}) => {
+const CurrentWeather: React.FC<Props> = ({ weather }) => {
+  return (
+    <>
+      <h1>Temp: {weather.main.temp}</h1>
+    </>
+  );
+};
+
+export const CurrentWeatherView: React.FC = () => {
+  const { data: location } = useGeolocation();
+
+  // gross
+  const { latitude, longitude } = location ?? { latitude: 0, longitude: 0 };
+
   const { data: currentWeather } = useGetCurrentWeatherQuery({
     latitude,
     longitude,
   });
 
-  return (
-    <>
-      <h1>Temp: {currentWeather?.main.temp}</h1>
-    </>
-  );
+  if (!currentWeather) {
+    return <>Loading...</>;
+  }
+
+  return <CurrentWeather weather={currentWeather} />;
 };

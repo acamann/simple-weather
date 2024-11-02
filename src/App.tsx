@@ -1,15 +1,12 @@
 import "./App.css";
 import { CurrentWeatherView } from "./components/CurrentWeatherView";
-import { useGeolocation } from "./hooks/useGeolocation";
+import { ForecastView } from "./components/ForecastView";
 
 function App() {
-  const { data: location } = useGeolocation();
-
-  return !location ? (
-    <>Loading...</>
-  ) : (
+  return (
     <>
-      <CurrentWeatherView location={location} />
+      <CurrentWeatherView />
+      <ForecastView />
     </>
   );
 }
