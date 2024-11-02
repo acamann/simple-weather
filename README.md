@@ -7,7 +7,6 @@ This app uses vite, React, & RTK Query
 TODO:
 
 - support cross platform w/ Capacitor
-- set up CI/CD for web
 - set up styled components
 - port over the D3.js visualizations
 

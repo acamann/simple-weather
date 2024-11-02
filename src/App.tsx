@@ -1,11 +1,16 @@
 import "./App.css";
+import { useGeolocation } from "./hooks/useGeolocation";
 import { useGetCurrentWeatherQuery } from "./services/weather";
 
 function App() {
-  const { data: currentWeather } = useGetCurrentWeatherQuery({
-    latitude: 29.8091725,
-    longitude: -95.5404691,
-  });
+  const { data: location } = useGeolocation();
+  const { data: currentWeather } = useGetCurrentWeatherQuery(
+    {
+      latitude: location?.latitude ?? 0,
+      longitude: location?.longitude ?? 0,
+    },
+    { skip: !location }
+  );
 
   return (
     <>
