@@ -15,9 +15,8 @@ const CurrentWeather: React.FC<Props> = ({ weather }) => {
 };
 
 export const CurrentWeatherView: React.FC = () => {
+  // TODO add to RTK state
   const { data: location } = useGeolocation();
-
-  // gross
   const { latitude, longitude } = location ?? { latitude: 0, longitude: 0 };
 
   const { data: currentWeather } = useGetCurrentWeatherQuery({
