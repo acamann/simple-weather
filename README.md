@@ -6,7 +6,9 @@ This app uses vite, React, & RTK Query
 
 TODO:
 
+- support cross platform w/ Capacitor
+- set up CI/CD for web
+- set up styled components
 - port over the D3.js visualizations
-- support cross platform w/ Capacitor.
 
 This repo is a port of a similar app previously developed at https://github.com/acamann/SimpleWeather to originally explore React Native, and Android/iOS development using Expo.
