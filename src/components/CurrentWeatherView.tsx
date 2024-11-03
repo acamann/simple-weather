@@ -12,6 +12,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  //border: solid 5px red;
 `;
 
 const Icon = styled.div`
@@ -22,6 +23,7 @@ const Icon = styled.div`
 const Temps = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
 `;
 
 const Temp = styled.div`

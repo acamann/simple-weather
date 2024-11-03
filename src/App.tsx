@@ -5,8 +5,8 @@ import { GeolocationProvider } from "./providers/GeolocationProvider";
 
 const Container = styled.div`
   display: flex;
+  gap: 16px;
   flex-direction: column;
-  flex: 1;
   align-items: center;
   justify-content: space-between;
 `;
