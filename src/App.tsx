@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { CurrentWeatherView } from "./components/CurrentWeatherView";
 import { ForecastView } from "./components/ForecastView";
-import { GeolocationProvider } from "./providers/GeolocationProvider";
+import { WeatherProvider } from "./providers/WeatherProvider";
 
 const Container = styled.div`
   display: flex;
@@ -10,17 +10,18 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   flex: 1;
+  height: 100%;
 `;
 
 function App() {
   return (
-    <GeolocationProvider>
+    <WeatherProvider>
       <Container>
         <CurrentWeatherView />
         <ForecastView />
         <div>Andy Camann</div>
       </Container>
-    </GeolocationProvider>
+    </WeatherProvider>
   );
 }
 
