@@ -1,11 +1,9 @@
 import { useContext } from "react";
-import { GeolocationContext } from "../providers/GeolocationContext";
-import { useGetCurrentWeatherQuery } from "../services/weather";
-import { CurrentWeather as TCurrentWeather } from "../services/weatherTypes";
 import styled from "styled-components";
 import { formatTemp } from "../utils/common";
 import { WeatherIcon } from "./WeatherIcon";
 import { useNearestCity } from "../hooks/useNearestCity";
+import { WeatherContext } from "../providers/WeatherContext";
 
 const Container = styled.div`
   width: 100%;
@@ -30,11 +28,8 @@ const Temp = styled.div`
   font-size: 64px;
 `;
 
-type Props = {
-  current: TCurrentWeather;
-};
-
-const CurrentWeather: React.FC<Props> = ({ current }) => {
+export const CurrentWeatherView: React.FC = () => {
+  const { current } = useContext(WeatherContext);
   const city = useNearestCity();
   return (
     <Container>
@@ -53,19 +48,4 @@ const CurrentWeather: React.FC<Props> = ({ current }) => {
       </Temps>
     </Container>
   );
-};
-
-export const CurrentWeatherView: React.FC = () => {
-  const { latitude, longitude } = useContext(GeolocationContext);
-
-  const { data: currentWeather } = useGetCurrentWeatherQuery({
-    latitude,
-    longitude,
-  });
-
-  if (!currentWeather) {
-    return <>Loading...</>;
-  }
-
-  return <CurrentWeather current={currentWeather} />;
 };
