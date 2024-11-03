@@ -13,6 +13,8 @@
 body {
   margin: 0;
   padding: 0;
+  height: 100vh;
+  display: flex;
 
   background-color: rgb(245, 247, 250);
   color: rgb(50, 63, 75);
@@ -20,4 +22,5 @@ body {
 
 #root {
   padding: 16px;
+  display: flex;
 }
