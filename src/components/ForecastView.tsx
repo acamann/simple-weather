@@ -1,6 +1,7 @@
-import { useGeolocation } from "../hooks/useGeolocation";
+import { useContext } from "react";
 import { useGetForecastQuery } from "../services/weather";
 import { Forecast as TForecast } from "../services/weatherTypes";
+import { GeolocationContext } from "../providers/GeolocationContext";
 
 type Props = {
   forecast: TForecast;
@@ -18,9 +19,7 @@ const Forecast: React.FC<Props> = ({ forecast }) => {
 };
 
 export const ForecastView: React.FC = () => {
-  // TODO add to RTK state
-  const { data: location } = useGeolocation();
-  const { latitude, longitude } = location ?? { latitude: 0, longitude: 0 };
+  const { latitude, longitude } = useContext(GeolocationContext);
 
   const { data: forecast } = useGetForecastQuery({
     latitude,

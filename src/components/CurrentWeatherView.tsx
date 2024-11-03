@@ -1,4 +1,5 @@
-import { useGeolocation } from "../hooks/useGeolocation";
+import { useContext } from "react";
+import { GeolocationContext } from "../providers/GeolocationContext";
 import { useGetCurrentWeatherQuery } from "../services/weather";
 import { CurrentWeather as TCurrentWeather } from "../services/weatherTypes";
 
@@ -15,9 +16,7 @@ const CurrentWeather: React.FC<Props> = ({ weather }) => {
 };
 
 export const CurrentWeatherView: React.FC = () => {
-  // TODO add to RTK state
-  const { data: location } = useGeolocation();
-  const { latitude, longitude } = location ?? { latitude: 0, longitude: 0 };
+  const { latitude, longitude } = useContext(GeolocationContext);
 
   const { data: currentWeather } = useGetCurrentWeatherQuery({
     latitude,
