@@ -1,7 +1,4 @@
-type LocationProps = {
-  latitude: number;
-  longitude: number;
-};
+import { GeoCoordinates } from "../types";
 
 export type Weather = {
   id: number;
@@ -15,11 +12,12 @@ export type CurrentWeather = {
   dt: number;
   main: {
     temp: number;
+    feels_like: number;
   };
   weather: Weather[];
 };
 
-export type CurrentWeatherProps = LocationProps & {
+export type CurrentWeatherProps = GeoCoordinates & {
   exclude?: string;
 };
 
@@ -28,4 +26,4 @@ export type Forecast = {
   list: CurrentWeather[];
 };
 
-export type ForecastProps = LocationProps;
+export type ForecastProps = GeoCoordinates;

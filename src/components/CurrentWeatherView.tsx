@@ -5,9 +5,10 @@ import { CurrentWeather as TCurrentWeather } from "../services/weatherTypes";
 import styled from "styled-components";
 import { formatTemp } from "../utils/common";
 import { WeatherIcon } from "./WeatherIcon";
+import { useNearestCity } from "../hooks/useNearestCity";
 
 const Container = styled.div`
-  width: 500px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,17 +19,36 @@ const Icon = styled.div`
   height: 100px;
 `;
 
+const Temps = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Temp = styled.div`
+  font-size: 64px;
+`;
+
 type Props = {
   current: TCurrentWeather;
 };
 
 const CurrentWeather: React.FC<Props> = ({ current }) => {
+  const city = useNearestCity();
   return (
     <Container>
       <Icon>
         <WeatherIcon weather={current.weather} />
       </Icon>
-      <h1>{formatTemp(current.main.temp)}</h1>
+      <Temps>
+        <Temp>{formatTemp(current.main.temp)}</Temp>
+        <div>
+          {current.weather.length > 0
+            ? `${current.weather[0].description}, `
+            : undefined}
+          feels like {formatTemp(current.main.feels_like)}
+        </div>
+        <div>{city}</div>
+      </Temps>
     </Container>
   );
 };

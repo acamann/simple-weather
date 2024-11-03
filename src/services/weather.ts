@@ -9,7 +9,7 @@ import type {
 const OPEN_WEATHER_MAP_API_KEY = import.meta.env.VITE_OPEN_WEATHER_MAP_API_KEY;
 
 export const weatherApi = createApi({
-  reducerPath: "pokemonApi",
+  reducerPath: "weatherApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.openweathermap.org/data/2.5/",
   }),

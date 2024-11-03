@@ -1,9 +1,7 @@
 import { createContext } from "react";
+import { GeoCoordinates } from "../types";
 
-export type GeolocationContextType = {
-  longitude: number;
-  latitude: number;
-};
+type GeolocationContextType = GeoCoordinates;
 
 export const GeolocationContext = createContext<GeolocationContextType>({
   longitude: 0,

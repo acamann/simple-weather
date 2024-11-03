@@ -1,13 +1,11 @@
 import React, { PropsWithChildren, useEffect, useState } from "react";
-import {
-  GeolocationContext,
-  GeolocationContextType,
-} from "./GeolocationContext";
+import { GeolocationContext } from "./GeolocationContext";
+import { GeoCoordinates } from "../types";
 
 export const GeolocationProvider: React.FC<PropsWithChildren> = ({
   children,
 }) => {
-  const [location, setLocation] = useState<GeolocationContextType>();
+  const [location, setLocation] = useState<GeoCoordinates>();
   const [error, setError] = useState<string>();
 
   useEffect(() => {
