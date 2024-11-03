@@ -4,6 +4,7 @@ import { Forecast as TForecast } from "../services/weatherTypes";
 import { GeolocationContext } from "../providers/GeolocationContext";
 import styled from "styled-components";
 import { SectionTitle } from "./SectionTitle";
+import { ForecastGraph } from "./ForecastGraph";
 
 const Container = styled.div`
   width: 100%;
@@ -18,9 +19,7 @@ const Forecast: React.FC<Props> = ({ forecast }) => {
   return (
     <Container>
       <SectionTitle>This Week</SectionTitle>
-      {forecast.list.map((weather) => (
-        <div key={weather.dt}>{weather.main.temp}</div>
-      ))}
+      <ForecastGraph forecast={forecast.list} />
     </Container>
   );
 };

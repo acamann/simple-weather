@@ -14,6 +14,10 @@ export type CurrentWeather = {
     temp: number;
     feels_like: number;
   };
+  pop: number;
+  rain?: {
+    "3h": number;
+  };
   weather: Weather[];
 };
 
