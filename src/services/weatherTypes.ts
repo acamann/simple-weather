@@ -3,12 +3,20 @@ type LocationProps = {
   longitude: number;
 };
 
+export type Weather = {
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
+};
+
 // Current Weather
 export type CurrentWeather = {
   dt: number;
   main: {
     temp: number;
   };
+  weather: Weather[];
 };
 
 export type CurrentWeatherProps = LocationProps & {
