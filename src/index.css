@@ -4,6 +4,8 @@
   font-weight: 400;
   font-size: 14px;
 
+  height: 100%;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -13,7 +15,7 @@
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
+  height: 100%;
   display: flex;
 
   background-color: rgb(245, 247, 250);
