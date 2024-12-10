@@ -6,8 +6,6 @@ import styled from "styled-components";
 const ClickableCard = styled.div`
   width: 100%;
   > :hover {
-    border: solid 1px lightgray;
-    border-radius: 4px;
     cursor: pointer;
   }
 `;

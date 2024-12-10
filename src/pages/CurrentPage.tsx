@@ -1,5 +1,5 @@
-import { CurrentWeatherView } from "../components/CurrentWeatherView";
 import styled from "styled-components";
+import { CurrentWeatherView } from "../components/CurrentWeatherView";
 import { BackButton } from "../components/BackButton";
 
 const Container = styled.div`
