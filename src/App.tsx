@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { CurrentWeatherView } from "./components/CurrentWeatherView";
-import { ForecastView } from "./components/ForecastView";
 import { WeatherProvider } from "./providers/WeatherProvider";
+import { BrowserRouter, Route, Routes } from "react-router";
+import { OverviewPage } from "./pages/OverviewPage";
+import { CurrentPage } from "./pages/CurrentPage";
+import { ForecastPage } from "./pages/ForecastPage";
 
 const Container = styled.div`
   display: flex;
@@ -17,8 +19,13 @@ function App() {
   return (
     <WeatherProvider>
       <Container>
-        <CurrentWeatherView />
-        <ForecastView />
+        <BrowserRouter>
+          <Routes>
+            <Route index element={<OverviewPage />} />
+            <Route path="current" element={<CurrentPage />} />
+            <Route path="forecast" element={<ForecastPage />} />
+          </Routes>
+        </BrowserRouter>
         <div>Andy Camann</div>
       </Container>
     </WeatherProvider>

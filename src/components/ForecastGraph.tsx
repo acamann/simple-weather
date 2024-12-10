@@ -47,9 +47,12 @@ type Props = {
   height?: number;
 };
 
-export const ForecastGraph: React.FC<Props> = ({ forecast, height = 180 }) => {
+export const ForecastGraph: React.FC<Props> = ({ forecast, height = 220 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
+
+  const scaleHeight = 40;
+  const graphHeight = height - scaleHeight;
 
   useEffect(() => {
     if (containerRef.current) {
@@ -121,12 +124,12 @@ export const ForecastGraph: React.FC<Props> = ({ forecast, height = 180 }) => {
   const scaleTemps = d3scale
     .scaleLinear()
     .domain([low.degrees, high.degrees])
-    .range([height - 24, hasChanceOfPrecip ? 36 : 12]);
+    .range([graphHeight - 24, hasChanceOfPrecip ? 36 : 12]);
 
   const scalePercentage = d3scale
     .scaleLinear()
     .domain([0, 1])
-    .range([height, 12]);
+    .range([graphHeight, 12]);
 
   const temperaturePath = d3shape
     .line(
@@ -207,7 +210,7 @@ export const ForecastGraph: React.FC<Props> = ({ forecast, height = 180 }) => {
 
   return (
     <div ref={containerRef} style={{ width: "100%", height }}>
-      <svg width={width} height={height}>
+      <svg width={width} height={graphHeight}>
         <defs>
           <linearGradient
             id="precipitationGradient"
@@ -270,7 +273,7 @@ export const ForecastGraph: React.FC<Props> = ({ forecast, height = 180 }) => {
         style={{
           width: "100%",
           position: "relative",
-          height: 40,
+          height: scaleHeight,
         }}
       >
         {days.map((day, index) => (
