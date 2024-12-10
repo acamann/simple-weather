@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CurrentWeather } from "../services/weatherTypes";
 import { getDayOfWeek } from "../utils/common";
 import { WeatherIcon } from "./WeatherIcon";
@@ -44,25 +44,33 @@ interface ForecastData {
 
 type Props = {
   forecast: CurrentWeather[];
+  height?: number;
 };
 
-// TODO: how to make this thing not care about the padding set by it's parent
-const PADDING = 32;
-
-export const ForecastGraph: React.FC<Props> = ({ forecast }) => {
-  const [width, setWidth] = useState(window.innerWidth - PADDING);
+export const ForecastGraph: React.FC<Props> = ({ forecast, height = 180 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(0);
 
   useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth - PADDING);
-    };
+    if (containerRef.current) {
+      const handleResize = () => {
+        if (containerRef.current) {
+          const containerWidth =
+            containerRef.current.getBoundingClientRect().width;
 
-    window.addEventListener("resize", handleResize);
+          setWidth(containerWidth);
+        }
+      };
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+      handleResize();
+
+      window.addEventListener("resize", handleResize);
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
+  }, [containerRef]);
 
   const forecastData: ForecastData[] = forecast.map((datum) => ({
     date: new Date(datum.dt * 1000),
@@ -72,12 +80,10 @@ export const ForecastGraph: React.FC<Props> = ({ forecast }) => {
     rain: datum.rain?.["3h"] ?? 0,
   }));
 
-  const height = 180;
-
   const scaleDate = d3scale
     .scaleTime()
     .domain([forecastData[0].date, forecastData[forecastData.length - 1].date])
-    .range([12, width - 8]);
+    .range([0, width]);
 
   const feelsLikeDesc = [...forecastData].sort(
     (a, b) => b.feels_like - a.feels_like
@@ -200,7 +206,7 @@ export const ForecastGraph: React.FC<Props> = ({ forecast }) => {
   });
 
   return (
-    <>
+    <div ref={containerRef} style={{ width: "100%", height }}>
       <svg width={width} height={height}>
         <defs>
           <linearGradient
@@ -265,7 +271,6 @@ export const ForecastGraph: React.FC<Props> = ({ forecast }) => {
           width: "100%",
           position: "relative",
           height: 40,
-          marginLeft: -8,
         }}
       >
         {days.map((day, index) => (
@@ -278,6 +283,6 @@ export const ForecastGraph: React.FC<Props> = ({ forecast }) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
