@@ -1,10 +1,10 @@
 import React from "react";
-import { CurrentWeather } from "../services/weatherTypes";
+import { ForecastMoment } from "../services/weatherTypes";
 import styled from "styled-components";
 import { formatTemp } from "../utils/common";
 
 type Props = {
-  forecast: CurrentWeather[];
+  forecast: ForecastMoment[];
 };
 
 const Table = styled.table`
@@ -20,12 +20,14 @@ const Table = styled.table`
 export const ForecastTable: React.FC<Props> = ({ forecast }) => {
   return (
     <Table>
-      <tr>
-        <th>Time</th>
-        <th>Temp (Feels)</th>
-        <th>Weather</th>
-        <th>Precipitation</th>
-      </tr>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Temp (Feels)</th>
+          <th>Weather</th>
+          <th>Precipitation</th>
+        </tr>
+      </thead>
       <tbody>
         {forecast.map((item) => (
           <tr key={item.dt}>

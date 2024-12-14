@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { CurrentWeather } from "../services/weatherTypes";
+import { ForecastMoment } from "../services/weatherTypes";
 import { getDayOfWeek } from "../utils/common";
 import { WeatherIcon } from "./WeatherIcon";
 import * as d3scale from "d3-scale";
@@ -43,7 +43,7 @@ interface ForecastData {
 }
 
 type Props = {
-  forecast: CurrentWeather[];
+  forecast: ForecastMoment[];
   height?: number;
 };
 

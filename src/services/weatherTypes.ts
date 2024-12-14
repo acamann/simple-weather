@@ -1,5 +1,6 @@
 import { GeoCoordinates } from "../types";
 
+// common
 export type Weather = {
   id: number;
   main: string;
@@ -7,19 +8,20 @@ export type Weather = {
   icon: string;
 };
 
-// Current Weather
-export type CurrentWeather = {
+type WeatherMoment<TRain> = {
   dt: number;
   main: {
     temp: number;
     feels_like: number;
   };
   pop: number;
-  rain?: {
-    "3h": number;
-  };
+  rain?: TRain;
   weather: Weather[];
 };
+
+// Current Weather
+export type CurrentWeather = WeatherMoment<HourlyRain>;
+type HourlyRain = { "1h": number };
 
 export type CurrentWeatherProps = GeoCoordinates & {
   exclude?: string;
@@ -27,7 +29,9 @@ export type CurrentWeatherProps = GeoCoordinates & {
 
 // Five Day Forecast
 export type Forecast = {
-  list: CurrentWeather[];
+  list: ForecastMoment[];
 };
+export type ForecastMoment = WeatherMoment<ThreeHourlyRain>;
+type ThreeHourlyRain = { "3h": number };
 
 export type ForecastProps = GeoCoordinates;
