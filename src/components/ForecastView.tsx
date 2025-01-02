@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { SectionTitle } from "./SectionTitle";
-import { ForecastGraph } from "./ForecastGraph";
+import { ForecastGraph } from "../features/forecast/components/ForecastGraph";
 import { WeatherContext } from "../providers/WeatherContext";
 
 const Container = styled.div`

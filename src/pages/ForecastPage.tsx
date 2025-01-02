@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useContext } from "react";
 import { WeatherContext } from "../providers/WeatherContext";
-import { ForecastGraph } from "../components/ForecastGraph";
+import { ForecastGraph } from "../features/forecast/components/ForecastGraph";
 import { ForecastTable } from "../components/ForecastTable";
 
 const Container = styled.div`
